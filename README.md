@@ -1,5 +1,6 @@
 # Twitter Sentiment Analysis Service
 **@ Author:** Matteo Broglio
+**@Dashboard :** **[--> link to the dashboard <--](http://ec2-34-230-76-89.compute-1.amazonaws.com:8050/ )**
 
 ### ABSTRACT
 The goal of this project is to provide a ready-to-use service for twitter sentiment analysis.
@@ -17,3 +18,4 @@ The service  is made up by three main componentes:
 3. Dashboard
 
 Each componentes should be deployed on a dedicated VM( or Docker container)
+
