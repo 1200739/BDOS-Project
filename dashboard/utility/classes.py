@@ -6,8 +6,8 @@ import plotly.express as px
 import pandas as pd
 import mysql.connector
 import logging
-from params import db_user, db_password, db_host, db_schema, db_table
-from utils import logger
+from .params import db_user, db_password, db_host, db_schema, db_table
+from .utils import logger
 
 
 class MysqlCursor:

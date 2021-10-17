@@ -25,9 +25,10 @@ content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 TODAY = datetime.today()
 
-fastAPI_host = 'localhost'
+fastAPI_host = 'ec2-3-88-87-239.compute-1.amazonaws.com' #'localhost'
 fastAPI_port = 5000
 fastAPI_url = f'http://{fastAPI_host}:{fastAPI_port}'
 prediction_endpoint = f'{fastAPI_url}/getPredictedTweet'
 correction_endpoint = f'{fastAPI_url}/getCorrectTweet'
 translation_endpoint = f'{fastAPI_url}/getTranslatedTweet'
+get_tweets_by_topic_endpoint = f'{fastAPI_url}/getTweetsByTopic'

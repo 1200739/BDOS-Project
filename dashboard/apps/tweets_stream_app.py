@@ -105,42 +105,47 @@ def update_figure(n, range_time):
         data, columns = get_data(range_time)
         df = pd.DataFrame(data, columns=columns)
         logger.info(df.head())
-        df_mod = df.copy().groupby(['Status']).count().reset_index().rename(columns = {'Elapsed_Time':'count'}).astype({'Status': 'str'})        
-
+        df_mod = df.copy().groupby(['status_code']) \
+            .agg(count=('status_code', 'count')) \
+                .reset_index() \
+                    .astype({'status_code': 'str'})      
+                    
+        df_mod2 = df.copy().groupby(['response']) \
+            .agg(count=('response', 'count')) \
+                .reset_index()    
+        
         # STATUS CODE BARPLOT
-        # fig = px.bar(df_mod, x = 'Service', y = 'count', color = 'Status', barmode='group', title = 'HISTOGRAM')
         fig1 = px.bar(
             df_mod, 
-            x = 'Status', 
+            x = 'status_code', 
             y = 'count', 
-            color = 'Status', 
+            color = 'status_code', 
             barmode='group', 
-            title = 'HISTOGRAM'
+            title = 'STATUS'
             )
         fig1.update_layout({
             'plot_bgcolor': 'rgba(0, 0, 0, 0)'
             })
         
         # ELAPSED TIME BOXPLOT
-        # fig2 = px.ecdf(df, x = "Elapsed_Time", color = 'Service', title = 'ECDF')
         fig2 = px.box(
             df, 
-            y = "Elapsed_Time", 
-            title = 'ECDF', 
+            y = "elapsed_time", 
+            title = 'ELAPSED TIME', 
             points="all"
             )
         fig2.update_layout({
             'plot_bgcolor': 'rgba(0, 0, 0, 0)' 
             })
-        
+                
         # SENTIMENT BARPLOT
-        fig3 = px.violin(
-            df, 
-            y="Elapsed_Time", 
-            color="Service", 
-            box=True, points="all", 
-            hover_data=df.columns, 
-            title = 'VIOLIN & BOXPLOT'
+        fig3 = px.bar(
+            df_mod2, 
+            x="response", 
+            y="count",
+            color = 'response', 
+            barmode='group', 
+            title = 'SENTIMENT'
             )
         fig3.update_layout({
             'plot_bgcolor': 'rgba(0, 0, 0, 0)'
@@ -148,24 +153,25 @@ def update_figure(n, range_time):
         
         # POLARITY DENSE PLOT
         fig4 = px.violin(df, 
-                         y="Elapsed_Time", 
-                         color="Service", 
-                         box=True, points="all", 
-                         hover_data=df.columns, 
-                         title = 'VIOLIN & BOXPLOT'
-                         )
+                            y="polarity", 
+                            # color="Service", 
+                            box=True, 
+                         points="all", 
+                            hover_data=df.columns, 
+                            title = 'VIOLIN & BOXPLOT'
+                            )
         fig4.update_layout({
             'plot_bgcolor': 'rgba(0, 0, 0, 0)'
             })
         
         # SUBJECTIVITY DENSE PLOT
         fig5 = px.violin(df, 
-                         y="Elapsed_Time", 
-                         color="Service", 
-                         box=True, points="all", 
-                         hover_data=df.columns, 
-                         title = 'VIOLIN & BOXPLOT'
-                         )
+                            y="subjectivity", 
+                            #color="Service", 
+                            box=True, points="all", 
+                            hover_data=df.columns, 
+                            title = 'VIOLIN & BOXPLOT'
+                            )
         fig5.update_layout({
             'plot_bgcolor': 'rgba(0, 0, 0, 0)'
             })

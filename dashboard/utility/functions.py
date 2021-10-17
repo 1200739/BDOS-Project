@@ -6,16 +6,16 @@ import plotly.express as px
 import pandas as pd
 import mysql.connector
 import logging
-from params import db_user, db_password, db_host, db_schema, db_table
-from utils import logger
-from classes import MysqlCursor
+from .params import db_user, db_password, db_host, db_schema, db_table
+from .utils import logger
+from .classes import MysqlCursor
 
 # =============================================================================
 # FUNCTIONS
 # =============================================================================
 def get_data(range_time):
     try:
-        query = f'select status_code, sentiment, polarity, subjectivity, elapsed_time from {db_schema}.{db_table} where current_timestamp() - log_timestamp < {range_time}'
+        query = f'select status_code, response, polarity, subjectivity, elapsed_time from {db_schema}.{db_table} where current_timestamp() - tweet_timestamp < {range_time}'
         with MysqlCursor() as cur:
                 cur.execute(query)
                 data = cur.fetchall()

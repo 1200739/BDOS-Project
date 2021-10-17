@@ -1,5 +1,4 @@
 import logging
-from importlib.metadata import version
 from params import file_log_name
 
 
@@ -19,6 +18,6 @@ fh.setFormatter(
     )
 logger.addHandler(fh)
 
-ML_VERSION = version('textblob')
+ML_VERSION = '0.15.3'
 HOST = '0.0.0.0'
 PORT = 5000

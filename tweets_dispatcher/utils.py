@@ -1,6 +1,6 @@
 import logging
 import mysql.connector
-
+from params import file_log_name
 # LOGGING CONFIG
 FORMAT = '%(levelname)s - TIME: %(asctime)s, NAME: %(name)s, FUNC: %(funcName)s, MSG: %(message)s'
 logging.basicConfig(
